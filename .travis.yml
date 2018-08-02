@@ -1,0 +1,17 @@
+language: cpp
+
+before_script:
+script:
+ 
+  - cd /home/travis/build/pk-otus/02_ip_filter
+  - cmake .
+  - cmake --build .
+  - cmake --build . --target package
+
+deploy: 
+  
+  provider: script
+  skip_cleanup: true
+  script:       
+   - curl -T 02_ip_filter-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -upk-otus:$BINTRAY_API_KEY "https://api.bintray.com/content/pk-otus/OTUS/02_ip_filter/$TRAVIS_BUILD_NUMBER/02_ip_filter.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1" 
+  
