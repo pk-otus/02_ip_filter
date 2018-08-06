@@ -5,18 +5,27 @@ if (DEFINED ENV{TRAVIS_BUILD_NUMBER})
 else()
    project(ip_filter VERSION 0.0.1)
 endif()
-configure_file(version.h.in version.h)
+configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
 add_executable(ip_filter ip_filter.cpp)
 
-
-set_target_properties(ip_filter PROPERTIES
-  CXX_STANDARD 14
-  CXX_STANDARD_REQUIRED ON
-  COMPILE_OPTIONS -Wpedantic -Wall -Wextra
-)
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+	set_target_properties(ip_filter PROPERTIES
+		CXX_STANDARD 14
+		CXX_STANDARD_REQUIRED ON
+		COMPILE_OPTIONS -W3 
+	)
+else()
+	set_target_properties(ip_filter PROPERTIES
+		CXX_STANDARD 14
+		CXX_STANDARD_REQUIRED ON
+		COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+	)
+endif()
 
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
+install(FILES ip.tsv DESTINATION bin)
+install(FILES out.tsv DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
