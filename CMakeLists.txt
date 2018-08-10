@@ -22,7 +22,6 @@ else()
 		COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 		)
 endif()
-
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
