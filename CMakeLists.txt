@@ -9,12 +9,19 @@ configure_file(version.h.in version.h)
 
 add_executable(ip_filter ip_filter.cpp)
 
-
-set_target_properties(ip_filter PROPERTIES
-  CXX_STANDARD 14
-  CXX_STANDARD_REQUIRED ON
-  COMPILE_OPTIONS -Wpedantic -Wall -Wextra
-)
+if (MSVC)
+	set_target_properties(ip_filter PROPERTIES
+		CXX_STANDARD 14
+		CXX_STANDARD_REQUIRED ON
+		COMPILE_OPTIONS -W3
+		)
+else()
+	set_target_properties(ip_filter PROPERTIES
+		CXX_STANDARD 14
+		CXX_STANDARD_REQUIRED ON
+		COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+		)
+endif()
 
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
