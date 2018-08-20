@@ -39,6 +39,7 @@ namespace
 	}
 
 	auto printIPAddress (const ip_addr_t& ip_addr)
+
 	{
 		for (auto ip_part = ip_addr.cbegin(); ip_part != ip_addr.cend(); ++ip_part)
 		{
@@ -73,6 +74,7 @@ namespace
 		assert(END_OCTET < d.size());
 
 		for (size_t i = BEGIN_OCTET; i <= END_OCTET; ++i)
+
 		{
 			if (d[i] == byte_value) return true;
 		}
@@ -100,6 +102,7 @@ namespace
 		ip_adress_pool_t result;
 		copy_if(source.begin(), source.end(), std::back_inserter(result),
 			[byte_value](const ip_addr_t& d) { return filter_bytes(d, byte_value); });
+
 		return result;
 	}
 }

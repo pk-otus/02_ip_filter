@@ -5,6 +5,7 @@ if (DEFINED ENV{TRAVIS_BUILD_NUMBER})
 else()
    project(ip_filter VERSION 0.0.1)
 endif()
+
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
 add_executable(ip_filter ip_filter.cpp)
