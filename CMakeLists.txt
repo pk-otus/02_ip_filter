@@ -5,7 +5,8 @@ if (DEFINED ENV{TRAVIS_BUILD_NUMBER})
 else()
    project(ip_filter VERSION 0.0.1)
 endif()
-configure_file(version.h.in version.h)
+
+configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
 add_executable(ip_filter ip_filter.cpp)
 
@@ -22,7 +23,10 @@ else()
 		COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 		)
 endif()
+
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
+install(FILES ip.tsv DESTINATION bin)
+install(FILES out.tsv DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
