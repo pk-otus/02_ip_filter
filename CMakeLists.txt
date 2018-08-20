@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.2)
 
 if (DEFINED ENV{TRAVIS_BUILD_NUMBER})
-   project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+   set(PROJECT_VERSION_PATCH $ENV{TRAVIS_BUILD_NUMBER})
 else()
-   project(ip_filter VERSION 0.0.1)
+   set(PROJECT_VERSION_PATCH 1)
 endif()
+
+project(ip_filter VERSION 0.0.${PROJECT_VERSION_PATCH})
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
